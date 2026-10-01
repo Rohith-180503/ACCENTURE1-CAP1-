@@ -1,0 +1,35 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261001172412
+Username: N-BALA-ROHITH\rohith
+RunAs User: N-BALA-ROHITH\rohith
+Configuration Name: 
+Machine: N-BALA-ROHITH (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\rohith\AppData\Local\Programs\Microsoft VS Code\07f806f999\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+Process ID: 9852
+PSVersion: 5.1.26100.9549
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9549
+BuildVersion: 10.0.26100.9549
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is f:\ACCENTURE-PROJECTS-CAPSTONE\1790853648\Project-Harness Engineering with Claude and Claude Code \evidence\01-agentic-loop\setup-and-tests.txt
+
+erialize-0.11.2 certifi-2026.7.22 claims_intake-0.1.0 colorama-0.4.6 distro-1.9.
+0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 iniconfig-2.3.0 jiter-0.17.0
+librt-0.16.0 mypy-2.3.1 mypy_extensions-1.1.0 packaging-26.3 pathspec-1.1.1 plug
+gy-1.6.0 pydantic-2.13.5 pydantic-core-2.46.5 pygments-2.21.0 pytest-9.1.1 ruff-
+0.16.9 sniffio-1.3.1 typing-extensions-4.16.0 typing-inspection-0.4.4
+
+[notice] A new release of pip is available: 26.1.2 -> 26.2.1
+[notice] To update, run: F:\ACCENTURE-PROJECTS-CAPSTONE\1790853648\Build a Claim
+s Intake Agent with a stop_reason-Driven Loop\exercises\03-dynamic-decomposition
+\solution\.venv\Scripts\python.exe -m pip install --upgrade pip
+
+**********************
+Windows PowerShell transcript end
+End time: 20261001172455
+**********************
