@@ -74,6 +74,17 @@ Expect the starter suite to fail until the `TODO` blocks are resolved; the exerc
 
 **Run the scoped verify command, not a bare `pytest`.** The Claims Intake, Long-Conversation Context, and Monorepo Team projects are *cumulative* — each exercise ships the full project test suite, so tests for later, not-yet-built steps are present from exercise 1. A bare `pytest` (even in a correct intermediate `solution/`) will show those later tests as expected reds. Each exercise README names the exact subset that should pass at that step; only the final exercise of a project goes fully green on a bare `pytest`. (The Multi-Shift project is the exception — each stage is self-contained and passes on its own.)
 
+## Capstone submission evidence
+
+The submitted evidence is organized under [`submission/`](submission/):
+
+- System 1: loop traces and outcomes in [`submission/system1/`](submission/system1/), including the 30-test pytest report.
+- System 2: token budget in [`submission/system2/budget.json`](submission/system2/budget.json), context output in [`submission/system2/context.md`](submission/system2/context.md), and evaluator/control JSONL records in [`submission/system2/eval.jsonl`](submission/system2/eval.jsonl) and [`submission/system2/eval_control.jsonl`](submission/system2/eval_control.jsonl).
+- System 3: Claude Code configuration and validation evidence in [`submission/system3/`](submission/system3/).
+- System 4: tiered-state, shift-run, fork, and test artifacts in [`submission/system4/`](submission/system4/).
+- Reflection: [`submission/reflection-brief.md`](submission/reflection-brief.md).
+- Packaged submission: [`capstone_submission.zip`](capstone_submission.zip).
+
 ## License
 
 See [LICENSE.md](LICENSE.md). Educational content © Udacity, Inc., licensed CC BY-NC-ND 4.0 except where noted.
