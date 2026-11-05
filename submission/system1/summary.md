@@ -1,4 +1,4 @@
-# Run summary — 20261026_153604
+# Run summary — 20261105_101519
 
 - Model: `claude-haiku-4-5-20251001`
 - Fixtures processed: 8

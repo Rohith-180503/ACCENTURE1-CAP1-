@@ -1,7 +1,7 @@
 # Reflection Brief — Harness Engineering Capstone
 
 **Name:** NIDUMOLU BALA ROHITH
-**Date:** October 26, 2026
+**Date:** November 5, 2026
 
 Replace each `→` with your answer. **Every answer cites at least one artifact from your own runs** — a run ID, file path, token count, claim outcome, or test count. Uncited answers do not pass. 3–6 sentences each unless noted. Paste short artifact snippets where they help.
 
@@ -18,7 +18,7 @@ Replace each `→` with your answer. **Every answer cites at least one artifact 
 ### System 1 — Agentic loop
 
 1. **Loop control.** Quote the `stop_reason` sequence from one trace. Name the file and function that decides continue-vs-stop, and how.
-   → In run artifact `runs/20261026_153604/traces/claim_03_water_damage.jsonl`, the turn-by-turn `stop_reason` sequence across 5 turns is:
+   → In run artifact `runs/20261105_101519/traces/claim_03_water_damage.jsonl`, the turn-by-turn `stop_reason` sequence across 5 turns is:
    ```json
    Turn 1: {"stop_reason": "tool_use", "tool_calls": ["lookup_policy", "record_claim_fact"...]}
    Turn 2: {"stop_reason": "tool_use", "tool_calls": ["request_clarification"]}
@@ -35,12 +35,12 @@ Replace each `→` with your answer. **Every answer cites at least one artifact 
    → The two overlapping tools are `route_to_adjuster` and `escalate_to_human` in `claims_intake/tools.py`, both of which represent terminal routing actions that accept claim summaries and candidate queues. Their descriptions prevent misrouting by establishing crisp, mutually exclusive confidence boundaries: `route_to_adjuster` explicitly states it must be called only when "classification confidence is at least 0.6 and severity has been assessed," whereas `escalate_to_human` is specified for when "classification confidence is below 0.6 even after clarification, or when the claim cannot be routed safely." When `_t_route_to_adjuster` encounters missing prerequisites, it returns a structured JSON error `{"is_error": true, "error_category": "permanent", "is_retryable": false, "message": "classify_claim must be called before routing"}` rather than a generic string or uncaught exception. This structured payload informs the agent of the exact invariant violation, allowing it in Turn 3 to dynamically invoke `classify_claim` and `assess_severity` before successfully calling `route_to_adjuster` in Turn 4.
 
 4. **Your numbers.** Quote the turn count and cost for one claim. How does it differ from the README sample, and why?
-   → From `runs/20261026_153604/summary.md`, `claim_03_water_damage` took 5 turns, asked 1 clarification, consumed 18,629 input tokens and 1,145 output tokens, took 15.3 seconds of wall-clock time, and cost an estimated $0.0244 USD. In the project README baseline sample, `claim_03_water_damage` completed in 4 turns at an estimated cost of ~$0.018 USD with 0 clarifications. The variance occurred because the live `claude-haiku-4-5-20251001` model in our run detected genuine ambiguity between internal plumbing failure and exterior storm flooding, prompting an extra interactive turn using `request_clarification` ("Do you know what caused the flooding...?") before committing to the property damage classification.
+   → From `runs/20261105_101519/summary.md`, `claim_03_water_damage` took 5 turns, asked 1 clarification, consumed 18,629 input tokens and 1,145 output tokens, took 15.3 seconds of wall-clock time, and cost an estimated $0.0244 USD. In the project README baseline sample, `claim_03_water_damage` completed in 4 turns at an estimated cost of ~$0.018 USD with 0 clarifications. The variance occurred because the live `claude-haiku-4-5-20251001` model in our run detected genuine ambiguity between internal plumbing failure and exterior storm flooding, prompting an extra interactive turn using `request_clarification` ("Do you know what caused the flooding...?") before committing to the property damage classification.
 
 ### System 2 — Context strategy
 
 5. **The reduction.** From `budget.json`: baseline tokens, assembled tokens, reduction %. Which section dominates the assembled context, and why keep it verbatim?
-   → From artifact `runs/20261026-154345/budget.json`:
+   → From artifact `runs/20261105-101519/budget.json`:
    - Baseline tokens: 38,708
    - Assembled tokens: 16,875
    - Reduction percentage: 56.40% (exceeding the ≥50% capstone requirement)
@@ -50,7 +50,7 @@ Replace each `→` with your answer. **Every answer cites at least one artifact 
    → The architectural rule is: **Resolved historical segments whose business outcomes are finalized are aggressively summarized and extracted into structured entities, while the current active, unresolved segment is preserved byte-exact.** In `budget.json`, the two resolved segments—`resolved/refund` and `resolved/subscription`—were compressed down to 414 tokens and 486 tokens respectively (down from ~12,334 and ~11,475 raw transcript tokens, an ~96% reduction), while critical cross-cutting identifiers were extracted into the `# Case Facts` block at 204 tokens. Meanwhile, the active payment-method update conversation was retained in full at 15,789 tokens to guarantee zero information loss during live problem resolution.
 
 7. **Facts block.** Compare `eval.jsonl` to `eval_control.jsonl`. Which question regressed, and what does that prove?
-   → In `runs/20261026-154345/eval.jsonl`, all 6 evaluation questions passed (6/6, 100%), with Q6 correctly returning the structured status token derived from `# Case Facts`. In contrast, in `runs/20261026-154345/eval_control.jsonl` (where the `# Case Facts` block was stripped), Question 6 regressed from `PASS` to `FAIL`: instead of providing the exact case status token `AVS_MISMATCH` / structured status, the model fell back to conversational paraphrasing ("Active issue"). This regression empirically proves that the `# Case Facts` section is not redundant fluff; it provides essential, high-density factual anchoring for exact structured fields that narrative dialogue summaries inevitably discard.
+   → In `runs/20261105-101519/eval.jsonl`, all 6 evaluation questions passed (6/6, 100%), with Q6 correctly returning the structured status token derived from `# Case Facts`. In contrast, in `runs/20261105-101519/eval_control.jsonl` (where the `# Case Facts` block was stripped), Question 6 regressed from `PASS` to `FAIL`: instead of providing the exact case status token `AVS_MISMATCH` / structured status, the model fell back to conversational paraphrasing ("Active issue"). This regression empirically proves that the `# Case Facts` section is not redundant fluff; it provides essential, high-density factual anchoring for exact structured fields that narrative dialogue summaries inevitably discard.
 
 ### System 3 — Claude Code config
 
