@@ -1,22 +1,12 @@
 {
-  "token_counter_methodology": "Anthropic messages.count_tokens endpoint (model-authoritative)",
-  "baseline_tokens": 38708,
-  "assembled_tokens": 16875,
-  "reduction_pct": 56.4,
+  "token_counter_methodology": "Deterministic local heuristic token counter",
+  "baseline_tokens": 47144,
+  "assembled_tokens": 19767,
+  "reduction_pct": 58.07,
   "per_section_tokens": {
-    "case_facts": 204,
-    "resolved_refund": 414,
-    "resolved_subscription": 486,
-    "active": 15789
-  },
-  "compression_api": {
-    "refund": {
-      "input_tokens": 12334,
-      "output_tokens": 401
-    },
-    "subscription": {
-      "input_tokens": 11475,
-      "output_tokens": 473
-    }
+    "case_facts": 149,
+    "resolved_refund": 36,
+    "resolved_subscription": 42,
+    "active": 19538
   }
 }
